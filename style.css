@@ -126,6 +126,10 @@ label {
 }
 
 @media only screen and (max-width: 768px) {
+    .main-logo{
+        margin-top: 5vh;
+    }
+
     .main-logo-img {
         width: 70%;
     }
