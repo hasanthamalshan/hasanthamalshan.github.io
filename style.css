@@ -138,4 +138,9 @@ label {
         width: 80%;
         margin: 50px auto;
     }
+
+    .home-paragraph{
+        width: 80%;
+        margin-bottom: 40px;
+    }
 }
