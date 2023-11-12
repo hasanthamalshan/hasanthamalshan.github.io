@@ -9,10 +9,6 @@ window.onload = function() {
     // submit_btn_spinner.style.display = "none"
 }
 
-function generateRandomValue() {
-    return Math.random();
-} 
-
 function roundToTwoDecimalPlaces(number) {
     return Number(number.toFixed(2));
 }
@@ -39,6 +35,7 @@ let onClickCheck = () =>{
     home_para.style.display = "none";
     submit_btn_spinner.style.display = "block";
     home_checking_block.style.display = "block";
+    home_results_block.style.display = "none";
 
     let link = document.getElementById("search").value;
 
@@ -50,24 +47,14 @@ let onClickCheck = () =>{
         fetch('http://127.0.0.1:8000/check/' + jobId)
         .then(response => response.json())
         .then(data => {
-            // console.log(JSON.stringify(data));
-
-            const randomValue = generateRandomValue();
-            let percentage = Math.round(roundToTwoDecimalPlaces(randomValue) * 100);
-
-            if( percentage <= 25 ){
+            if(data.prediction){
                 home_results_block.style.color = "#a22b0a";
-            }else if( percentage <= 50 ){
-                home_results_block.style.color = "#c06607";
-            }else if( percentage <= 75 ){
-                home_results_block.style.color = "#f6ce08";
+                home_results_block.textContent = "This job posting looks fake !"
             }else{
                 home_results_block.style.color = "#0aa263";
+                home_results_block.textContent = "This job posting looks real !"
             }
-
-            home_results_block.textContent = percentage + "%"
-
-            home_para.textContent = data.description
+            home_para.textContent = 'Job posting title : ' + data.title
             home_para.style.display = "block";
 
             document.getElementById("search").value = ""
